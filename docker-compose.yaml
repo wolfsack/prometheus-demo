@@ -1,0 +1,21 @@
+version: "3"
+
+services: 
+  prometheus:
+    image: prom/prometheus:v2.30.3
+    container_name: prom-demo
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prom:/prometheus
+
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    networks:
+      - prometheus
+
+
+networks:
+  prometheus:
+
