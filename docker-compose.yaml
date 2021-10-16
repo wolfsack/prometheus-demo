@@ -15,6 +15,22 @@ services:
     networks:
       - prometheus
 
+  node-exporter:
+    image: prom/node-exporter:v1.2.2
+    container_name: node-exporter
+    ports:
+      - '9100:9100'
+    networks:
+      - prometheus
+
+  go-demo:
+    build: ./go-demo-app
+    image: go-demo  
+    ports:
+      - '8090:8090'
+    networks:
+      - prometheus
+
 
 networks:
   prometheus:

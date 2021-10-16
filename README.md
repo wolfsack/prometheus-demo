@@ -23,6 +23,7 @@ inside the local repository directory:
 
     - build docker image from docker file
       - with tag/name prom-demo
+      - Dockerfile in this directory
     - run the container with
       - external port 9090 mapped to internal port 9090
       - container name prom_demo
@@ -42,5 +43,4 @@ Prometheus self-monitoring
     localhost:9090/metrics
 
 ---- 
-
     
