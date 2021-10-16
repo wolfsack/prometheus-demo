@@ -25,7 +25,7 @@ services:
 
   go-demo:
     build: ./go-demo-app
-    image: go-demo  
+    image: go-demo:latest  
     ports:
       - '8090:8090'
     networks:
