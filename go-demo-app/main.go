@@ -25,7 +25,7 @@ func main() {
 	requestCounter := 0
 	mux := http.NewServeMux()
 
-	// explicit route so it doesnt fallback to "/" and raising the counter
+	// explicit route so it doesnt fallback to "/" and raises the counter
 	mux.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) { w.WriteHeader(http.StatusInternalServerError) })
 
 	// simple landing page
