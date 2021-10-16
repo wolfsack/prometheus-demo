@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"strconv"
 )
@@ -43,7 +44,7 @@ func main() {
 		`))
 	})
 
-	// endpoint for Prometheus to scrape
+	// endpoint1 for Prometheus to scrape
 	mux.HandleFunc("/metrics", func(w http.ResponseWriter, r *http.Request) {
 		requestCounter++
 
@@ -53,6 +54,25 @@ func main() {
 			Value:   strconv.Itoa(requestCounter),  // the value to expose (here the counter)
 			Help:    "request_counter empty",       // some additional info that Prometheus collects
 			Type:    "counter",                     // on of these: Counter, Gauge, Histogram, Summary, Untyped
+			Comment: "Number of requests received", // Prometheus ignores this
+			Labels: map[string]string{ // Possible labels, not implemented here
+				"": "",
+			},
+		}
+		w.Header().Add("Content-Type", "text/plain")                // set Content-Type Header
+		w.Write([]byte(fmt.Sprintf(`%s`, metricToString(&metric)))) // write metric into response after formatting it to a string
+	})
+
+	// endpoint2 for Prometheus to scrape
+	mux.HandleFunc("/api/metrics", func(w http.ResponseWriter, r *http.Request) {
+		requestCounter++
+		temp := rand.Float64() * 50
+		// creating Metric
+		metric := Metric{
+			Name:    "room_temperature",            // can be freely choosen
+			Value:   fmt.Sprintf("%f", temp),       // the value to expose (here the counter)
+			Help:    "room_temperature rand",       // some additional info that Prometheus collects
+			Type:    "Gauge",                       // on of these: Counter, Gauge, Histogram, Summary, Untyped
 			Comment: "Number of requests received", // Prometheus ignores this
 			Labels: map[string]string{ // Possible labels, not implemented here
 				"": "",
