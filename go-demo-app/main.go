@@ -115,7 +115,7 @@ func metricToString(m *Metric) string {
 `, m.Help, m.Name, m.Type, m.Comment, formatMetricQuery(m), m.Value)
 }
 
-// checking and adding Labels
+// adding Labels
 func formatMetricQuery(m *Metric) string {
 	if len(m.Labels) == 0 {
 		return m.Name
