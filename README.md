@@ -11,7 +11,10 @@ inside the local repository directory:
     with docker and docker-compose installed run:
     
         docker-compose up
-
+        
+        
+    If you don't have permission to create new files on the host system prometheus won't be able to start.
+    In the docker-compose.yaml is a bind-mount for the directory "prom" defined. Prometheus needs permission to write files there.
 
 ## Endpoints
 ----
